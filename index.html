@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References — Hajj & The Waste Crisis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── VARIABLES ── */
+:root {
+  --paper:   #f4efe6;
+  --ink:     #1a1410;
+  --red:     #c0392b;
+  --red-dim: #8b2020;
+  --gray:    #4a4540;
+  --gray-lt: #9a9088;
+  --line:    #d4ccc0;
+  --white:   #ffffff;
+  --bg-cat:  #f0ebe0;
+}
+
+/* ── BASE ── */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Calibri, 'Calibri', 'Trebuchet MS', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  border-bottom: 4px solid var(--ink);
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.page-header .eyebrow {
+  font-family: Calibri, sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray-lt);
+  margin-bottom: 10px;
+}
+
+.page-header h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 64px;
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.page-header h1 span {
+  color: var(--red);
+}
+
+.page-header .subtitle {
+  font-family: Calibri, sans-serif;
+  font-size: 13px;
+  color: var(--gray-lt);
+  letter-spacing: 1px;
+  margin-top: 10px;
+}
+
+/* ── RED RULE ── */
+.red-rule {
+  height: 3px;
+  background: var(--red);
+  margin: 0 0 36px 0;
+}
+
+/* ── APA NOTE ── */
+.apa-note {
+  background: var(--white);
+  border-left: 4px solid var(--ink);
+  padding: 14px 18px;
+  margin-bottom: 40px;
+  font-family: Calibri, sans-serif;
+  font-size: 13.5px;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+.apa-note strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ── CATEGORY BLOCK ── */
+.ref-category {
+  margin-bottom: 44px;
+}
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.cat-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 36px;
+  color: var(--red);
+  line-height: 1;
+  min-width: 36px;
+}
+
+.cat-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 17px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid var(--red);
+  padding-bottom: 5px;
+  flex: 1;
+}
+
+/* ── REFERENCE ITEM ── */
+.ref-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ref-item {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 0 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+
+.ref-item:last-child {
+  border-bottom: none;
+}
+
+.ref-item:hover {
+  background: rgba(192, 57, 43, 0.03);
+  margin: 0 -12px;
+  padding: 16px 12px;
+  border-radius: 3px;
+}
+
+/* Number badge */
+.ref-badge {
+  font-family: 'Anton', sans-serif;
+  font-size: 13px;
+  color: var(--white);
+  background: var(--red);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* Citation text */
+.ref-body {
+  font-family: Calibri, sans-serif;
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+.ref-body em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+.ref-body strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* URL line */
+.ref-url {
+  display: block;
+  margin-top: 5px;
+}
+
+.ref-url a {
+  font-family: Calibri, sans-serif;
+  font-size: 13.5px;
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(192, 57, 43, 0.25);
+  word-break: break-all;
+  transition: border-color 0.15s;
+}
+
+.ref-url a:hover {
+  border-color: var(--red);
+}
+
+/* Type badge */
+.type-badge {
+  display: inline-block;
+  font-family: Calibri, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 1px 7px;
+  border-radius: 2px;
+  margin-left: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.badge-oa     { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+.badge-doi    { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+.badge-pmc    { background: #F3E5F5; color: #6A1B9A; border: 1px solid #CE93D8; }
+.badge-thesis { background: #FFF8E1; color: #E65100; border: 1px solid #FFCC02; }
+.badge-pdf    { background: #FCE4EC; color: #AD1457; border: 1px solid #F48FB1; }
+.badge-web    { background: #F5F5F5; color: #424242; border: 1px solid #BDBDBD; }
+
+/* ── FOOTER ── */
+.page-footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 2px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-left .project-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+
+.footer-left .project-sub {
+  font-family: Calibri, sans-serif;
+  font-size: 12px;
+  color: var(--gray-lt);
+  margin-top: 3px;
+}
+
+.footer-right {
+  font-family: Calibri, sans-serif;
+  font-size: 11px;
+  color: var(--gray-lt);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.footer-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.ftag {
+  font-family: Calibri, sans-serif;
+  font-size: 10px;
+  color: var(--red-dim);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* ── PRINT ── */
+@media print {
+  body { padding: 20px; background: white; }
+  .ref-item:hover { background: none; margin: 0; padding: 16px 0; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  body { padding: 32px 20px 60px; }
+  .page-header h1 { font-size: 44px; }
+  .ref-item { grid-template-columns: 36px 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <p class="eyebrow">Group Project · Environmental Crisis Analysis · Hajj Pilgrimage</p>
+  <h1>REFERENCES</h1>
+</header>
+
+<div class="red-rule"></div>
+
+<!-- APA NOTE -->
+<div class="apa-note">
+  <strong>Citation Format:</strong> All references follow <strong>APA 7th Edition</strong> formatting. Titles of journals and books are italicised. Where available, DOI links or direct publisher URLs are provided for immediate access. Click any link to navigate to the original source.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 1 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">01</div>
+    <div class="cat-title">Hajj — Environmental Impact &amp; Solid Waste</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">1</div>
+      <div class="ref-body">
+        Saudi Ministry of Hajj and Umrah. (2024). <em>Official Hajj statistics and pilgrimage management reports.</em> Kingdom of Saudi Arabia.
+        <span class="ref-url"><a href="https://www.haj.gov.sa/en" target="_blank" rel="noopener">https://www.haj.gov.sa/en</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">2</div>
+      <div class="ref-body">
+        Abonomi, A., De Lacy, T., &amp; Pyke, J. (2022). Environmental impact of the Hajj. <em>International Journal of Religious Tourism and Pilgrimage, 10</em>(1), Article 12.
+        <span class="ref-url"><a href="https://arrow.tudublin.ie/ijrtp/vol10/iss1/12/" target="_blank" rel="noopener">https://arrow.tudublin.ie/ijrtp/vol10/iss1/12/</a> <span class="type-badge badge-oa">Open Access</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">3</div>
+      <div class="ref-body">
+        Abubakar, I. R., &amp; Dano, U. L. (2018). Sustainable urban planning strategies for mitigating climate change in Saudi Arabia. <em>Environment, Development and Sustainability, 22</em>, 5129–5152.
+        <span class="ref-url"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9566108/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC9566108/</a> <span class="type-badge badge-pmc">PMC</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">4</div>
+      <div class="ref-body">
+        Alsebaei, A. F. (2014). <em>Solid waste management and recycling during Hajj pilgrimage in Mina</em> [Doctoral dissertation, University of Leeds]. White Rose eTheses Online.
+        <span class="ref-url"><a href="https://etheses.whiterose.ac.uk/id/eprint/8275/" target="_blank" rel="noopener">https://etheses.whiterose.ac.uk/id/eprint/8275/</a> <span class="type-badge badge-thesis">Thesis</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">5</div>
+      <div class="ref-body">
+        Arab News. (2019, August 13). <em>How Saudi Arabia cleans up after 2.5m Hajj pilgrims.</em> Arab News.
+        <span class="ref-url"><a href="https://www.arabnews.com/node/1539536/amp" target="_blank" rel="noopener">https://www.arabnews.com/node/1539536/amp</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 2 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">02</div>
+    <div class="cat-title">Carbon Footprint &amp; Climate Impact</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">6</div>
+      <div class="ref-body">
+        El Hanandeh, A. (2013). Quantifying the carbon footprint of religious tourism: The case of Hajj. <em>Journal of Cleaner Production, 52</em>, 53–60.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.jclepro.2013.03.009" target="_blank" rel="noopener">https://doi.org/10.1016/j.jclepro.2013.03.009</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">7</div>
+      <div class="ref-body">
+        Al-Habaibeh, A., Hamadeh, S., Aljahdali, K., &amp; Alghamdi, S. (2020). Towards enhancing sustainability: A novel approach for reducing carbon emission during the transportation of Zamzam water by pilgrims during Hajj and Umrah. <em>Research in Transportation Business &amp; Management, 35</em>, 100454.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.rtbm.2020.100454" target="_blank" rel="noopener">https://doi.org/10.1016/j.rtbm.2020.100454</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">8</div>
+      <div class="ref-body">
+        Khodeir, M., Shamy, M., Alghamdi, M., Zhong, M., Sun, H., Costa, M., Chen, L. C., &amp; Maciejczyk, P. (2021). Air quality over major cities of Saudi Arabia during Hajj periods of 2019 and 2020. <em>International Journal of Environmental Research and Public Health, 18</em>(3), 1164.
+        <span class="ref-url"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7852470/" target="_blank" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC7852470/</a> <span class="type-badge badge-pmc">PMC</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 3 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">03</div>
+    <div class="cat-title">Water Resources &amp; Environmental Health</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">9</div>
+      <div class="ref-body">
+        Saudi Water Authority. (2024). <em>The transformation journey of water supply in Mecca.</em> Kingdom of Saudi Arabia.
+        <span class="ref-url"><a href="https://www.swa.gov.sa/en/news/13" target="_blank" rel="noopener">https://www.swa.gov.sa/en/news/13</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">10</div>
+      <div class="ref-body">
+        Othman, A., Ahmed, O. B., Abotalib, A. Z., Sayqal, A., &amp; Al-Kahtani, K. (2022). Assessment of supplied water quality during mass gatherings in arid environments. <em>Journal of King Saud University – Science, 34</em>(5), 102101.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.jksus.2022.102101" target="_blank" rel="noopener">https://doi.org/10.1016/j.jksus.2022.102101</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">11</div>
+      <div class="ref-body">
+        Rahman, J., Thu, M., Arshad, N., &amp; Van der Putten, M. (2017). Mass gatherings and public health: Case studies from the Hajj to Mecca. <em>Annals of Global Health, 82</em>(5), 797–806.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.aogh.2016.12.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.aogh.2016.12.007</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 4 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">04</div>
+    <div class="cat-title">Waste Hierarchy Framework &amp; Circular Economy</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">12</div>
+      <div class="ref-body">
+        European Commission. (2008). <em>Directive 2008/98/EC of the European Parliament and of the Council on waste (Waste Framework Directive).</em> Official Journal of the European Union.
+        <span class="ref-url"><a href="https://environment.ec.europa.eu/topics/waste-and-recycling/waste-framework-directive_en" target="_blank" rel="noopener">https://environment.ec.europa.eu/topics/waste-and-recycling/waste-framework-directive_en</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">13</div>
+      <div class="ref-body">
+        Zhang, C., Hu, M., Di Maio, F., Sprecher, B., Yang, X., &amp; Tukker, A. (2022). An overview of the waste hierarchy framework for analyzing the circularity in construction and demolition waste management in Europe. <em>Science of the Total Environment, 803</em>, 149892.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.scitotenv.2021.149892" target="_blank" rel="noopener">https://doi.org/10.1016/j.scitotenv.2021.149892</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">14</div>
+      <div class="ref-body">
+        Pires, A., &amp; Martinho, G. (2019). Waste hierarchy index for circular economy in waste management. <em>Waste Management, 95</em>, 298–305.
+        <span class="ref-url"><a href="https://doi.org/10.1016/j.wasman.2019.06.014" target="_blank" rel="noopener">https://doi.org/10.1016/j.wasman.2019.06.014</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 5 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">05</div>
+    <div class="cat-title">Smart Waste Technology &amp; Infrastructure</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">15</div>
+      <div class="ref-body">
+        Abdullah, N., Al-Wesabi, O. A., Mohammed, B. A., Hamza Osman, A., Al-Hagery, M. A., &amp; Alduais, N. A. M. (2022). IoT-based waste management system in formal and informal public areas in Mecca. <em>International Journal of Environmental Research and Public Health, 19</em>(20), 13066.
+        <span class="ref-url"><a href="https://doi.org/10.3390/ijerph192013066" target="_blank" rel="noopener">https://doi.org/10.3390/ijerph192013066</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">16</div>
+      <div class="ref-body">
+        Farré, J. A., Mateu, C., Teixidó, M., &amp; Cabeza, L. F. (2023). Pneumatic urban waste collection systems: A review. <em>Applied Sciences, 13</em>(2), 877.
+        <span class="ref-url"><a href="https://doi.org/10.3390/app13020877" target="_blank" rel="noopener">https://doi.org/10.3390/app13020877</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">17</div>
+      <div class="ref-body">
+        Osra, F. A., Alzahrani, J. S., Alsoufi, M. S., Osra, O. A., &amp; Alqarni, S. A. (2021). Environmental and economic sustainability in the Hajj system. <em>Arabian Journal of Geosciences, 14</em>, Article 1–12.
+        <span class="ref-url"><a href="https://doi.org/10.1007/s12517-021-08533-x" target="_blank" rel="noopener">https://doi.org/10.1007/s12517-021-08533-x</a> <span class="type-badge badge-doi">DOI</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<!-- CATEGORY 6 -->
+<!-- ═══════════════════════════════════════════════════════════════════════════ -->
+<section class="ref-category">
+  <div class="cat-header">
+    <div class="cat-num">06</div>
+    <div class="cat-title">Sustainable Events &amp; Mass Gatherings</div>
+  </div>
+
+  <ul class="ref-list">
+
+    <li class="ref-item">
+      <div class="ref-badge">18</div>
+      <div class="ref-body">
+        ICLEI – Local Governments for Sustainability. (2022). <em>Sustainable events guide 2022.</em> ICLEI.
+        <span class="ref-url"><a href="https://e-lib.iclei.org/ICLEI%20SUSTAINABLE%20EVENT%20GUIDELINES.pdf" target="_blank" rel="noopener">https://e-lib.iclei.org/ICLEI%20SUSTAINABLE%20EVENT%20GUIDELINES.pdf</a> <span class="type-badge badge-pdf">PDF</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">19</div>
+      <div class="ref-body">
+        Imam, A., &amp; Alamoudi, M. (2014). Mina: The city of tents — origination and development. <em>Procedia — Social and Behavioral Sciences, 170</em>, 1351–1365.
+        <span class="ref-url"><a href="https://www.academia.edu/download/81771710/1351_1365_20MIGRAR_20INMIGRAR.pdf" target="_blank" rel="noopener">https://www.academia.edu/download/81771710/</a> <span class="type-badge badge-pdf">PDF</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">20</div>
+      <div class="ref-body">
+        EcoMENA. (2023). <em>6 ways to make your Hajj environmentally-friendly.</em> EcoMENA.
+        <span class="ref-url"><a href="https://www.ecomena.org/ways-to-make-your-hajj-environmentally-friendly/" target="_blank" rel="noopener">https://www.ecomena.org/ways-to-make-your-hajj-environmentally-friendly/</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+    <li class="ref-item">
+      <div class="ref-badge">21</div>
+      <div class="ref-body">
+        Earth.org. (2023, June 19). <em>Sustainable Hajj 2024: Paving the way for an eco-friendly pilgrimage.</em> Earth.org.
+        <span class="ref-url"><a href="https://earth.org/sustainable-hajj/" target="_blank" rel="noopener">https://earth.org/sustainable-hajj/</a> <span class="type-badge badge-web">Web</span></span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+</body>
+</html>
